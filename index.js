@@ -1,5 +1,5 @@
 const express = require("express");
-const { user, directory, diary } = require("./router");
+const { user, pay, directory, account, diary } = require("./router");
 const app = express();
 
 app.use(express.json());
@@ -10,7 +10,11 @@ app.get("/", (req, res) => {
 });
 
 app.use(user);
-// app.use(directory);
+app.use(pay);
+app.use(directory);
+app.use(account);
+app.use(diary);
+
 // app.use(diary);
 
 const PORT = 5000;

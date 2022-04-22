@@ -4,6 +4,7 @@ const User = new mongoose.Schema({
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now, required: true },
   nickname: { type: String, required: true, unique: true },
+  diary: { type: mongoose.Schema.Types.ObjectId, ref: "Diary" },
 });
 
 module.exports = User;
