@@ -19,9 +19,22 @@ router.post("/user/login", async (req, res) => {
     });
   }
 
+  req.session._id = loginUser._id;
+  req.session.is_logined = true;
+  req.session.nickname = loginUser.nickname;
+  req.session.email = loginUser.email;
+
+  const userInfo = {
+    id: req.session._id,
+    is_logined: req.session.is_logined,
+    nickname: req.session.nickname,
+    email: req.session.email,
+  };
+
   res.send({
     status: 200,
     msg: "login success",
+    userInfo,
   });
 });
 
