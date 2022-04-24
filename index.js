@@ -1,12 +1,24 @@
 const express = require("express");
 const { user, pay, directory, account, diary } = require("./router");
 const app = express();
+// const cors = require("cors");
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(cors());
 
+app.use(
+  session({
+    secret: process.env.SECRETCODE,
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore(),
+  })
+);
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.send(req.session);
 });
 
 app.use(user);
